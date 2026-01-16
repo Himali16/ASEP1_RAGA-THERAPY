@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Ragas According to Time of Day</title>
+
+    <style>
+        body {
+            background-color: #f5f5f5;
+            font-family: Arial, Helvetica, sans-serif;
+            padding: 30px;
+            color: #222;
+        }
+        
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+        
+        .raga-list {
+            max-width: 900px;
+            margin: auto;
+        }
+        /* DARK ROWS */
+        
+        .time-row {
+            background: #1f1f1f;
+            color: #ffffff;
+            padding: 14px 18px;
+            margin: 12px 0;
+            cursor: pointer;
+            border-radius: 8px;
+            font-size: 18px;
+            letter-spacing: 0.5px;
+            transition: background 0.3s, transform 0.2s;
+        }
+        
+        .time-row:hover {
+            background: #2c2c2c;
+            transform: scale(1.01);
+        }
+        /* Auto-highlight current time row */
+        
+        .time-row.active-time {
+            background: linear-gradient(135deg, #4f46e5, #22c55e);
+            box-shadow: 0 14px 35px rgba(79, 70, 229, 0.45);
+            position: relative;
+        }
+        /* Small indicator dot */
+        
+        .time-row.active-time::after {
+            content: "● Now Recommended";
+            font-size: 0.75rem;
+            color: #e0f2fe;
+            position: absolute;
+            right: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0.9;
+        }
+        /* POP-UP SECTION */
+        
+        .time-popup {
+            background: #ffffff;
+            padding: 18px 22px;
+            margin-top: 6px;
+            border-radius: 10px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.18);
+            animation: fadeIn 0.35s ease;
+        }
+        
+        .time-note {
+            font-style: italic;
+            margin-bottom: 12px;
+            color: #555;
+        }
+        /* RAGA ITEMS */
+        
+        .raga-item {
+            background: #efefef;
+            padding: 10px 14px;
+            margin: 10px 0;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.3s;
+        }
+        
+        .raga-item:hover {
+            background: #dedede;
+        }
+        
+        ul {
+            margin-left: 20px;
+            margin-top: 8px;
+        }
+        /* LISTENING DROPDOWN */
+        
+        details {
+            margin-top: 8px;
+        }
+        
+        summary {
+            cursor: pointer;
+            font-weight: 500;
+        }
+        
+        .raga-links li a {
+            text-decoration: none;
+            color: #1a1a1a;
+        }
+        
+        .raga-links li a:hover {
+            text-decoration: underline;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-6px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+
+    <script>
+        function toggleSection(id) {
+            const el = document.getElementById(id);
+            el.classList.toggle("hidden");
+        }
+    </script>
+</head>
+
+<body>
+
+    <h1>Ragas According to Time of Day</h1>
+
+    <div class="raga-list">
+
+        <!-- EARLY MORNING -->
+        <div class="time-row" id="earlyMorningRow" onclick="toggleSection('earlyMorning')">
+            Early Morning (4 AM – 7 AM)
+        </div>
+        <div id="earlyMorning" class="time-popup hidden">
+            <p class="time-note">Purity · Calmness · Spiritual Awakening</p>
+
+            <div class="raga-item" onclick="toggleSection('bhairav')">Raag Bhairav</div>
+            <ul id="bhairav" class="hidden">
+                <li>Creates seriousness and devotion</li>
+                <li>Stabilizes wandering thoughts</li>
+            </ul>
+            <details>
+                <summary>Begin Listening</summary>
+                <ul class="raga-links">
+                    <li><a href="https://www.youtube.com/results?search_query=raag+bhairav" target="_blank">Listen to this raga</a></li>
+                </ul>
+            </details>
+
+            <div class="raga-item" onclick="toggleSection('ahirbhairav')">Raag Ahir Bhairav</div>
+            <ul id="ahirbhairav" class="hidden">
+                <li>Balances mind and body</li>
+                <li>Induces peaceful awareness</li>
+            </ul>
+            <details>
+                <summary>Begin Listening</summary>
+                <ul class="raga-links">
+                    <li><a href="https://www.youtube.com/results?search_query=raag+ahir+bhairav" target="_blank">Listen to this raga</a></li>
+                </ul>
+            </details>
+        </div>
+
+        <!-- MORNING -->
+        <div class="time-row" id="morningRow" onclick="toggleSection('morning')">
+            Morning (7 AM – 10 AM)
+        </div>
+        <div id="morning" class="time-popup hidden">
+            <p class="time-note">Optimism · Energy · Positivity</p>
+
+            <div class="raga-item" onclick="toggleSection('bilawal')">Raag Bilawal</div>
+            <ul id="bilawal" class="hidden">
+                <li>Promotes cheerfulness</li>
+                <li>Encourages clarity and freshness</li>
+            </ul>
+            <details>
+                <summary>Begin Listening</summary>
+                <ul class="raga-links">
+                    <li><a href="https://www.youtube.com/results?search_query=raag+bilawal" target="_blank">Listen to this raga</a></li>
+                </ul>
+            </details>
+
+            <div class="raga-item" onclick="toggleSection('deshkar')">Raag Deshkar</div>
+            <ul id="deshkar" class="hidden">
+                <li>Invokes enthusiasm</li>
+                <li>Improves focus</li>
+            </ul>
+            <details>
+                <summary>Begin Listening</summary>
+                <ul class="raga-links">
+                    <li><a href="https://www.youtube.com/results?search_query=raag+deshkar" target="_blank">Listen to this raga</a></li>
+                </ul>
+            </details>
+        </div>
+
+        <!-- AFTERNOON -->
+        <div class="time-row" id="afternoonRow" onclick="toggleSection('afternoon')">
+            Afternoon (12 PM – 4 PM)
+        </div>
+        <div id="afternoon" class="time-popup hidden">
+            <p class="time-note">Stability · Calm Alertness</p>
+
+            <div class="raga-item" onclick="toggleSection('multani')">Raag Multani</div>
+            <ul id="multani" class="hidden">
+                <li>Balances intense emotions</li>
+                <li>Encourages introspection</li>
+            </ul>
+            <details>
+                <summary>Begin Listening</summary>
+                <ul class="raga-links">
+                    <li><a href="https://www.youtube.com/results?search_query=raag+multani" target="_blank">Listen to this raga</a></li>
+                </ul>
+            </details>
+
+            <div class="raga-item" onclick="toggleSection('todi')">Raag Todi</div>
+            <ul id="todi" class="hidden">
+                <li>Induces seriousness</li>
+                <li>Supports emotional depth</li>
+            </ul>
+            <details>
+                <summary>Begin Listening</summary>
+                <ul class="raga-links">
+                    <li><a href="https://www.youtube.com/results?search_query=raag+todi" target="_blank">Listen to this raga</a></li>
+                </ul>
+            </details>
+        </div>
+
+        <!-- EVENING -->
+        <div class="time-row" id="eveningRow" onclick="toggleSection('evening')">
+            Evening (4 PM – 7 PM)
+        </div>
+        <div id="evening" class="time-popup hidden">
+            <p class="time-note">Relaxation · Emotional Warmth</p>
+
+            <div class="raga-item" onclick="toggleSection('yaman')">Raag Yaman</div>
+            <ul id="yaman" class="hidden">
+                <li>Creates serenity</li>
+                <li>Encourages emotional openness</li>
+            </ul>
+            <details>
+                <summary>Begin Listening</summary>
+                <ul class="raga-links">
+                    <li><a href="https://www.youtube.com/results?search_query=raag+yaman" target="_blank">Listen to this raga</a></li>
+                </ul>
+            </details>
+
+            <div class="raga-item" onclick="toggleSection('kalyan')">Raag Kalyan</div>
+            <ul id="kalyan" class="hidden">
+                <li>Promotes peace and devotion</li>
+                <li>Balances emotions</li>
+            </ul>
+            <details>
+                <summary>Begin Listening</summary>
+                <ul class="raga-links">
+                    <li><a href="https://www.youtube.com/results?search_query=raag+kalyan" target="_blank">Listen to this raga</a></li>
+                </ul>
+            </details>
+        </div>
+
+        <!-- NIGHT -->
+        <div class="time-row" id="nightRow" onclick="toggleSection('night')">
+            Night (7 PM – 12 AM)
+        </div>
+        <div id="night" class="time-popup hidden">
+            <p class="time-note">Introspection · Emotional Release</p>
+
+            <div class="raga-item" onclick="toggleSection('bageshri')">Raag Bageshri</div>
+            <ul id="bageshri" class="hidden">
+                <li>Relieves emotional stress</li>
+                <li>Induces calmness</li>
+            </ul>
+            <details>
+                <summary>Begin Listening</summary>
+                <ul class="raga-links">
+                    <li><a href="https://www.youtube.com/results?search_query=raag+bageshri" target="_blank">Listen to this raga</a></li>
+                </ul>
+            </details>
+
+            <div class="raga-item" onclick="toggleSection('darbari')">Raag Darbari Kanada</div>
+            <ul id="darbari" class="hidden">
+                <li>Deep mental relaxation</li>
+                <li>Reduces anxiety</li>
+            </ul>
+            <details>
+                <summary>Begin Listening</summary>
+                <ul class="raga-links">
+                    <li><a href="https://www.youtube.com/results?search_query=raag+darbari+kanada" target="_blank">Listen to this raga</a></li>
+                </ul>
+            </details>
+        </div>
+
+    </div>
+
+    <script>
+        (function autoHighlightTime() {
+            const hour = new Date().getHours();
+
+            let activeRow = null;
+            let activePopup = null;
+
+            if (hour >= 4 && hour < 7) {
+                activeRow = "earlyMorningRow";
+                activePopup = "earlyMorning";
+            } else if (hour >= 7 && hour < 10) {
+                activeRow = "morningRow";
+                activePopup = "morning";
+            } else if (hour >= 12 && hour < 16) {
+                activeRow = "afternoonRow";
+                activePopup = "afternoon";
+            } else if (hour >= 16 && hour < 19) {
+                activeRow = "eveningRow";
+                activePopup = "evening";
+            } else {
+                activeRow = "nightRow";
+                activePopup = "night";
+            }
+
+            // Highlight row
+            const rowEl = document.getElementById(activeRow);
+            if (rowEl) rowEl.classList.add("active-time");
+
+            // Auto-open popup (optional but recommended)
+            const popupEl = document.getElementById(activePopup);
+            if (popupEl) popupEl.classList.remove("hidden");
+        })();
+    </script>
+
+</body>
+
+</html>

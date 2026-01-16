@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NaadHeal – Ragas for the 7 Chakras</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: radial-gradient(circle at top, #eef2ff, #fdfcfb);
+            color: #2b2b2b;
+            line-height: 1.7;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #6ee7b7, #a5b4fc);
+            padding: 35px 50px;
+            border-bottom-left-radius: 40px;
+            border-bottom-right-radius: 40px;
+        }
+        
+        header h1 {
+            font-size: 2.4rem;
+            color: #1f2937;
+        }
+        
+        header p {
+            margin-top: 8px;
+            font-size: 1rem;
+            opacity: 0.85;
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-top: 15px;
+            text-decoration: none;
+            color: #4338ca;
+            font-size: 0.95rem;
+        }
+        
+        .chakra-section {
+            padding: 70px 40px;
+            max-width: 1000px;
+            margin: auto;
+        }
+        
+        .chakra-section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #4338ca;
+            margin-bottom: 15px;
+        }
+        
+        .chakra-intro {
+            text-align: center;
+            max-width: 720px;
+            margin: auto;
+            color: #4b5563;
+            font-size: 1.05rem;
+            margin-bottom: 50px;
+        }
+        
+        .chakra-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .chakra-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(6px);
+            padding: 30px;
+            border-radius: 26px;
+            box-shadow: 0 18px 40px rgba(99, 102, 241, 0.18);
+            transition: transform 0.3s ease;
+        }
+        
+        .chakra-card:hover {
+            transform: translateY(-8px);
+        }
+        
+        .chakra-card h3 {
+            font-size: 1.4rem;
+            color: #4338ca;
+            margin-bottom: 10px;
+        }
+        
+        .chakra-card span {
+            font-size: 0.9rem;
+            color: #6b7280;
+        }
+        
+        .chakra-card p {
+            margin-top: 12px;
+            font-size: 0.95rem;
+            color: #374151;
+        }
+        
+        .chakra-card ul {
+            margin-top: 12px;
+            padding-left: 18px;
+            font-size: 0.9rem;
+            color: #374151;
+        }
+        
+        .chakra-list {
+            max-width: 850px;
+            margin: auto;
+            padding: 40px 20px;
+        }
+        /* Dark clickable row */
+        /* Chakra list wrapper */
+        
+        .chakra-list {
+            max-width: 850px;
+            margin: auto;
+            padding: 40px 20px;
+        }
+        /* Dark row – NaadHeal style */
+        
+        .chakra-row {
+            background: linear-gradient( 135deg, #4338ca, #6366f1);
+            color: #ffffff;
+            padding: 16px 24px;
+            margin-bottom: 12px;
+            border-radius: 16px;
+            cursor: pointer;
+            font-size: 1.15rem;
+            font-weight: 500;
+            box-shadow: 0 12px 30px rgba(99, 102, 241, 0.35);
+            transition: all 0.3s ease;
+        }
+        /* Hover = gentle lift */
+        
+        .chakra-row:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 18px 40px rgba(99, 102, 241, 0.45);
+        }
+        
+        .chakra-popup {
+            background: rgba(255, 255, 255, 0.92);
+            margin: 0 0 26px;
+            padding: 24px 28px;
+            border-radius: 20px;
+            box-shadow: 0 20px 45px rgba(99, 102, 241, 0.22);
+            animation: slideDown 0.35s ease;
+        }
+        
+        .raga-item {
+            font-size: 1rem;
+            color: #374151;
+            margin: 12px 0 4px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        
+        .raga-item:hover {
+            color: #4338ca;
+        }
+        /* Popup content */
+        
+        .chakra-popup {
+            background: #ffffff;
+            margin: 0 0 22px;
+            padding: 22px 26px;
+            border-radius: 16px;
+            box-shadow: 0 20px 45px rgba(0, 0, 0, 0.18);
+            animation: slideDown 0.35s ease;
+        }
+        /* Chakra description */
+        
+        .chakra-note {
+            font-size: 0.95rem;
+            color: #6b7280;
+            margin-bottom: 16px;
+        }
+        /* Raga name row */
+        
+        .raga-item {
+            font-size: 1rem;
+            color: #374151;
+            margin: 10px 0 4px;
+            cursor: pointer;
+        }
+        
+        .raga-item:hover {
+            color: #4338ca;
+        }
+        /* Benefits list */
+        
+        .chakra-popup ul {
+            margin-left: 20px;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+            color: #4b5563;
+        }
+        /* Listening dropdown */
+        
+        .listening-dropdown summary {
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: #4338ca;
+            margin-left: 20px;
+        }
+        
+        .raga-links li a {
+            font-size: 0.9rem;
+            color: #4f46e5;
+            text-decoration: none;
+        }
+        /* Hidden state */
+        
+        .hidden {
+            display: none;
+        }
+        /* Animation */
+        
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-8px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        footer {
+            margin-top: 60px;
+            text-align: center;
+            padding: 25px;
+            background: linear-gradient(135deg, #a5b4fc, #6ee7b7);
+            border-top-left-radius: 40px;
+            border-top-right-radius: 40px;
+        }
+        
+        footer p {
+            font-size: 0.9rem;
+            opacity: 0.85;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Ragas for the 7 Chakras</h1>
+        <p>Aligning sound, energy, and consciousness through Indian classical music</p>
+        <a href="Untitled-4.html" class="back-link">← Back to NaadHeal</a>
+    </header>
+
+    <section class="chakra-section">
+        <h2>Sound & Energy Alignment</h2>
+        <p class="chakra-intro">
+            Each chakra resonates with specific sound vibrations. Listening to the right raga can gently activate, balance, and harmonize these energy centers, supporting emotional and spiritual well-being.
+        </p>
+
+        <div class="chakra-list">
+
+            <!-- 1. Muladhara -->
+            <div class="chakra-row" onclick="toggleSection('muladhara')">
+                Muladhara (Root Chakra)
+            </div>
+            <div id="muladhara" class="chakra-popup hidden">
+                <p class="chakra-note">Stability · Grounding · Safety</p>
+
+                <div class="raga-item" onclick="toggleSection('raga_bhairav')">Raag Bhairav</div>
+                <ul id="raga_bhairav" class="hidden">
+                    <li>Promotes mental stability and grounding</li>
+                    <li>Reduces fear and restlessness</li>
+                </ul>
+                <details class="listening-dropdown">
+                    <summary>Begin Listening</summary>
+                    <ul class="raga-links">
+                        <li><a href="https://www.youtube.com/results?search_query=raag+bhairav" target="_blank">Listen to this raga</a></li>
+                    </ul>
+                </details>
+
+                <div class="raga-item" onclick="toggleSection('raga_malkauns')">Raag Malkauns</div>
+                <ul id="raga_malkauns" class="hidden">
+                    <li>Enhances inner strength</li>
+                    <li>Supports emotional grounding</li>
+                </ul>
+                <details class="listening-dropdown">
+                    <summary>Begin Listening</summary>
+                    <ul class="raga-links">
+                        <li><a href="https://www.youtube.com/results?search_query=raag+malkauns" target="_blank">Listen to this raga</a></li>
+                    </ul>
+                </details>
+            </div>
+
+            <!-- 2. Svadhisthana -->
+            <div class="chakra-row" onclick="toggleSection('svadhisthana')">
+                Svadhisthana (Sacral Chakra)
+            </div>
+            <div id="svadhisthana" class="chakra-popup hidden">
+                <p class="chakra-note">Creativity · Emotional Flow · Sensitivity</p>
+
+                <div class="raga-item" onclick="toggleSection('raga_khamaj')">Raag Khamaj</div>
+                <ul id="raga_khamaj" class="hidden">
+                    <li>Encourages creative expression</li>
+                    <li>Balances emotional fluctuations</li>
+                </ul>
+                <details class="listening-dropdown">
+                    <summary>Begin Listening</summary>
+                    <ul class="raga-links">
+                        <li><a href="https://www.youtube.com/results?search_query=raag+khamaj" target="_blank">Listen to this raga</a></li>
+                    </ul>
+                </details>
+
+                <div class="raga-item" onclick="toggleSection('raga_desh')">Raag Desh</div>
+                <ul id="raga_desh" class="hidden">
+                    <li>Invokes warmth and joy</li>
+                    <li>Releases suppressed emotions</li>
+                </ul>
+                <details class="listening-dropdown">
+                    <summary>Begin Listening</summary>
+                    <ul class="raga-links">
+                        <li><a href="https://www.youtube.com/results?search_query=raag+desh" target="_blank">Listen to this raga</a></li>
+                    </ul>
+                </details>
+            </div>
+
+            <!-- 3. Manipura -->
+            <div class="chakra-row" onclick="toggleSection('manipura')">
+                Manipura (Solar Plexus Chakra)
+            </div>
+            <div id="manipura" class="chakra-popup hidden">
+                <p class="chakra-note">Confidence · Energy · Willpower</p>
+
+                <div class="raga-item" onclick="toggleSection('raga_bilawal')">Raag Bilawal</div>
+                <ul id="raga_bilawal" class="hidden">
+                    <li>Boosts optimism and clarity</li>
+                    <li>Enhances self-confidence</li>
+                </ul>
+                <details class="listening-dropdown">
+                    <summary>Begin Listening</summary>
+                    <ul class="raga-links">
+                        <li><a href="https://www.youtube.com/results?search_query=raag+bilawal" target="_blank">Listen to this raga</a></li>
+                    </ul>
+                </details>
+
+                <div class="raga-item" onclick="toggleSection('raga_shankara')">Raag Shankara</div>
+                <ul id="raga_shankara" class="hidden">
+                    <li>Activates inner strength</li>
+                    <li>Supports mental alertness</li>
+                </ul>
+                <details class="listening-dropdown">
+                    <summary>Begin Listening</summary>
+                    <ul class="raga-links">
+                        <li><a href="https://www.youtube.com/results?search_query=raag+shankara" target="_blank">Listen to this raga</a></li>
+                    </ul>
+                </details>
+            </div>
+
+            <!-- 4. Anahata -->
+            <div class="chakra-row" onclick="toggleSection('anahata')">
+                Anahata (Heart Chakra)
+            </div>
+            <div id="anahata" class="chakra-popup hidden">
+                <p class="chakra-note">Love · Compassion · Emotional Healing</p>
+
+                <div class="raga-item" onclick="toggleSection('raga_yaman')">Raag Yaman</div>
+                <ul id="raga_yaman" class="hidden">
+                    <li>Encourages emotional openness</li>
+                    <li>Soothes anxiety and grief</li>
+                </ul>
+                <details class="listening-dropdown">
+                    <summary>Begin Listening</summary>
+                    <ul class="raga-links">
+                        <li><a href="https://www.youtube.com/results?search_query=raag+yaman" target="_blank">Listen to this raga</a></li>
+                    </ul>
+                </details>
+
+                <div class="raga-item" onclick="toggleSection('raga_bageshri')">Raag Bageshri</div>
+                <ul id="raga_bageshri" class="hidden">
+                    <li>Heals emotional wounds</li>
+                    <li>Brings emotional softness</li>
+                </ul>
+                <details class="listening-dropdown">
+                    <summary>Begin Listening</summary>
+                    <ul class="raga-links">
+                        <li><a href="https://www.youtube.com/results?search_query=raag+bageshri" target="_blank">Listen to this raga</a></li>
+                    </ul>
+                </details>
+            </div>
+
+            <!-- 5. Vishuddha -->
+            <div class="chakra-row" onclick="toggleSection('vishuddha')">
+                Vishuddha (Throat Chakra)
+            </div>
+            <div id="vishuddha" class="chakra-popup hidden">
+                <p class="chakra-note">Expression · Clarity · Communication</p>
+
+                <div class="raga-item" onclick="toggleSection('raga_hamsadhwani')">Raag Hamsadhwani</div>
+                <ul id="raga_hamsadhwani" class="hidden">
+                    <li>Enhances clarity of expression</li>
+                    <li>Improves mental alertness</li>
+                </ul>
+                <details class="listening-dropdown">
+                    <summary>Begin Listening</summary>
+                    <ul class="raga-links">
+                        <li><a href="https://www.youtube.com/results?search_query=raag+hamsadhwani" target="_blank">Listen to this raga</a></li>
+                    </ul>
+                </details>
+
+                <div class="raga-item" onclick="toggleSection('raga_kedar')">Raag Kedar</div>
+                <ul id="raga_kedar" class="hidden">
+                    <li>Encourages honest communication</li>
+                    <li>Creates mental calmness</li>
+                </ul>
+                <details class="listening-dropdown">
+                    <summary>Begin Listening</summary>
+                    <ul class="raga-links">
+                        <li><a href="https://www.youtube.com/results?search_query=raag+kedar" target="_blank">Listen to this raga</a></li>
+                    </ul>
+                </details>
+            </div>
+
+            <!-- 6. Ajna -->
+            <div class="chakra-row" onclick="toggleSection('ajna')">
+                Ajna (Third Eye Chakra)
+            </div>
+            <div id="ajna" class="chakra-popup hidden">
+                <p class="chakra-note">Intuition · Insight · Awareness</p>
+
+                <div class="raga-item" onclick="toggleSection('raga_darbari')">Raag Darbari Kanada</div>
+                <ul id="raga_darbari" class="hidden">
+                    <li>Deepens introspection</li>
+                    <li>Calms mental turbulence</li>
+                </ul>
+                <details class="listening-dropdown">
+                    <summary>Begin Listening</summary>
+                    <ul class="raga-links">
+                        <li><a href="https://www.youtube.com/results?search_query=raag+darbari+kanada" target="_blank">Listen to this raga</a></li>
+                    </ul>
+                </details>
+
+                <div class="raga-item" onclick="toggleSection('raga_jog')">Raag Jog</div>
+                <ul id="raga_jog" class="hidden">
+                    <li>Supports meditative awareness</li>
+                    <li>Enhances inner clarity</li>
+                </ul>
+                <details class="listening-dropdown">
+                    <summary>Begin Listening</summary>
+                    <ul class="raga-links">
+                        <li><a href="https://www.youtube.com/results?search_query=raag+jog" target="_blank">Listen to this raga</a></li>
+                    </ul>
+                </details>
+            </div>
+
+            <!-- 7. Sahasrara -->
+            <div class="chakra-row" onclick="toggleSection('sahasrara')">
+                Sahasrara (Crown Chakra)
+            </div>
+            <div id="sahasrara" class="chakra-popup hidden">
+                <p class="chakra-note">Consciousness · Peace · Transcendence</p>
+
+                <div class="raga-item" onclick="toggleSection('raga_ahirbhairav')">Raag Ahir Bhairav</div>
+                <ul id="raga_ahirbhairav" class="hidden">
+                    <li>Promotes spiritual awareness</li>
+                    <li>Balances mind and body</li>
+                </ul>
+                <details class="listening-dropdown">
+                    <summary>Begin Listening</summary>
+                    <ul class="raga-links">
+                        <li><a href="https://www.youtube.com/results?search_query=raag+ahir+bhairav" target="_blank">Listen to this raga</a></li>
+                    </ul>
+                </details>
+
+                <div class="raga-item" onclick="toggleSection('raga_bhairavi')">Raag Bhairavi</div>
+                <ul id="raga_bhairavi" class="hidden">
+                    <li>Creates emotional closure</li>
+                    <li>Induces peaceful reflection</li>
+                </ul>
+                <details class="listening-dropdown">
+                    <summary>Begin Listening</summary>
+                    <ul class="raga-links">
+                        <li><a href="https://www.youtube.com/results?search_query=raag+bhairavi" target="_blank">Listen to this raga</a></li>
+                    </ul>
+                </details>
+            </div>
+
+        </div>
+
+
+
+    </section>
+
+
+    <script>
+        function toggleSection(id) {
+            const el = document.getElementById(id);
+            if (!el) return;
+            el.classList.toggle("hidden");
+        }
+    </script>
+
+    <footer>
+        <p>© 2026 NaadHeal | Sound as a Path to Inner Harmony</p>
+    </footer>
+
+</body>
+
+</html>
