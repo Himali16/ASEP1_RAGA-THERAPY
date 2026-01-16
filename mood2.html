@@ -1,0 +1,1395 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ragas for Your Mood</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #f7f7f7;
+        }
+        /* Mood Page Heading */
+        
+        .mood-header {
+            text-align: center;
+            max-width: 720px;
+            margin: 0 auto 45px;
+        }
+        
+        .mood-header h2 {
+            font-size: 2.3rem;
+            color: #4338ca;
+            margin-bottom: 12px;
+        }
+        
+        .mood-header p {
+            font-size: 1.05rem;
+            color: #4b5563;
+            line-height: 1.6;
+        }
+        /* Mobile tuning */
+        
+        @media (max-width: 600px) {
+            .mood-header h2 {
+                font-size: 1.9rem;
+            }
+        }
+        
+        .section {
+            margin-bottom: 20px;
+        }
+        
+        .section h2 {
+            background-color: #6c63ff;
+            color: white;
+            padding: 12px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        
+        .subsection {
+            margin: 10px 0 0 20px;
+        }
+        
+        .subsection h3 {
+            background-color: #c4c3ff;
+            padding: 10px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .raga-box {
+            background-color: #e6e6ff;
+            margin: 5px 0 5px 20px;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .raga-box ul {
+            margin-left: 20px;
+            margin-top: 5px;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        /* ===============================
+   RAGAS FOR YOUR MOOD – FINAL THEME MATCH
+   =============================== */
+        /* Mood Section Wrapper */
+        
+        .mood-section {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        /* Mood Page Heading */
+        
+        .mood-header {
+            text-align: center;
+            max-width: 720px;
+            margin: 0 auto 50px;
+        }
+        
+        .mood-header h2 {
+            font-size: 2.3rem;
+            color: #4338ca;
+            margin-bottom: 12px;
+        }
+        
+        .mood-header p {
+            font-size: 1.05rem;
+            color: #4b5563;
+            line-height: 1.6;
+        }
+        /* Mood Category Card */
+        
+        .mood-card {
+            background: linear-gradient(180deg, #ffffff, #f9fafb);
+            padding: 22px 26px;
+            border-radius: 24px;
+            box-shadow: 0 15px 35px rgba(99, 102, 241, 0.15);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+        
+        .mood-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient( 120deg, rgba(167, 139, 250, 0.15), rgba(110, 231, 183, 0.15));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .mood-card:hover::before {
+            opacity: 1;
+        }
+        
+        .mood-card:hover {
+            transform: translateY(-8px) scale(1.015);
+            box-shadow: 0 25px 50px rgba(99, 102, 241, 0.25);
+        }
+        
+        .mood-card h3 {
+            font-size: 1.3rem;
+            color: #4338ca;
+            position: relative;
+            z-index: 1;
+        }
+        /* Hide / Show */
+        
+        .hidden {
+            display: none;
+        }
+        /* Raga Box */
+        
+        .raga-box {
+            margin-top: 14px;
+            margin-left: 22px;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(6px);
+            padding: 16px 20px;
+            border-radius: 20px;
+            font-size: 0.98rem;
+            color: #374151;
+            box-shadow: 0 12px 30px rgba(99, 102, 241, 0.15);
+            cursor: pointer;
+            transition: all 0.35s ease;
+        }
+        
+        .raga-box:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 45px rgba(99, 102, 241, 0.25);
+        }
+        /* Raga Benefits */
+        
+        .raga-box ul {
+            margin-top: 10px;
+            padding-left: 18px;
+            font-size: 0.9rem;
+            color: #4b5563;
+            line-height: 1.6;
+        }
+        
+        .raga-box ul li {
+            margin-bottom: 6px;
+        }
+        /* Smooth Expand Animation */
+        
+        .raga-box ul {
+            animation: fadeSlide 0.35s ease-in-out;
+        }
+        
+        @keyframes fadeSlide {
+            from {
+                opacity: 0;
+                transform: translateY(-6px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        /* Mobile Refinement */
+        
+        @media (max-width: 600px) {
+            .mood-header h2 {
+                font-size: 1.9rem;
+            }
+            .mood-card h3 {
+                font-size: 1.15rem;
+            }
+            .raga-box {
+                margin-left: 10px;
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="mood-header">
+        <h2>Ragas for Your Mood</h2>
+        <p>
+            Each raga carries a unique emotional vibration. Choose how you feel, and let sound gently guide your inner balance.
+        </p>
+    </div>
+
+    <!-- CALM & RELAXATION -->
+    <div class="section">
+        <h2 onclick="toggleSection('calm')">Calm & Relaxation / Stress Relief</h2>
+        <div id="calm" class="hidden">
+            <!-- Nervous System Calm -->
+            <div class="subsection">
+                <h3 onclick="toggleSection('nervous')">Nervous System Calm / Anxiety Relief</h3>
+                <div id="nervous" class="hidden">
+                    <div class="raga-box" onclick="toggleSection('raga_ahir')">Ahir Bhairav
+
+                        <ul id="raga_ahir" class="hidden">
+                            <li>Calms nervous system</li>
+                            <li>Brings emotional stability and peace</li>
+                            <li>Helps regulate blood pressure</li>
+                            <li>Improves digestion</li>
+                        </ul>
+                        <details class="listening-dropdown">
+                            <summary>Begin Listening</summary>
+                            <ul class="raga-links">
+                                <li>
+                                    <a href="https://www.youtube.com/watch?v=AkMZAMFXL-s&list=PLBzUuuoaduiY5YFnoEzEoTiLqs6PVOEZt&index=3" target="_blank">
+                Sarod Instrumental
+            </a>
+                                </li>
+                            </ul>
+                        </details>
+
+
+
+                    </div>
+                    <div class="raga-box" onclick="toggleSection('raga_bhageshri')">Bhageshri
+                        <ul id="raga_bhageshri" class="hidden">
+                            <li>Calms heart rate</li>
+                            <li>Reduces stress and anxiety</li>
+                        </ul>
+
+                        <details class="listening-dropdown">
+                            <summary>Begin Listening</summary>
+                            <ul class="raga-links">
+                                <li>
+                                    <a href="https://www.youtube.com/watch?v=7jkI02KaVEk&list=PLBzUuuoaduiY5YFnoEzEoTiLqs6PVOEZt&index=6" target="_blank">
+                Sarod Instrumental
+            </a>
+                                </li>
+                            </ul>
+                        </details>
+                    </div>
+                    <div class="raga-box" onclick="toggleSection('raga_brindabani')">Brindabani Sarang
+                        <ul id="raga_brindabani" class="hidden">
+                            <li>Reduces body heat</li>
+                            <li>Calms nervous system</li>
+                            <li>Relieves irritation</li>
+                        </ul>
+                        <details class="listening-dropdown">
+                            <summary>Begin Listening</summary>
+                            <ul class="raga-links">
+                                <li>
+                                    <a href="https://www.youtube.com/watch?v=9Uiy-oL1H9I&list=PLBzUuuoaduiY5YFnoEzEoTiLqs6PVOEZt&index=18" target="_blank">
+                Sarod Instrumental
+            </a>
+                                </li>
+                            </ul>
+                        </details>
+                    </div>
+                    <div class="raga-box" onclick="toggleSection('raga_gaudmalhar')">Gaud Malhar
+                        <ul id="raga_gaudmalhar" class="hidden">
+                            <li>Soothes nervous system</li>
+                            <li>Reduces mental tension</li>
+                            <li>Refreshes body and mind</li>
+                        </ul>
+                        <details class="listening-dropdown">
+                            <summary>Begin Listening</summary>
+                            <ul class="raga-links">
+                                <li>
+                                    <a href="https://www.youtube.com/watch?v=3Y5fYv-YH-4&list=PLBzUuuoaduiY5YFnoEzEoTiLqs6PVOEZt&index=26" target="_blank">
+                Sarod Instrumental
+            </a>
+                                </li>
+                            </ul>
+                        </details>
+                    </div>
+                    <div class="raga-box" onclick="toggleSection('raga_kedar')">Kedar
+                        <ul id="raga_kedar" class="hidden">
+                            <li>Calms anxiety</li>
+                            <li>Brings emotional peace</li>
+                        </ul>
+                        <details class="listening-dropdown">
+                            <summary>Begin Listening</summary>
+                            <ul class="raga-links">
+                                <li>
+                                    <a href="https://www.youtube.com/watch?v=8IOnn1-BtJI&list=PLBzUuuoaduiY5YFnoEzEoTiLqs6PVOEZt&index=41" target="_blank">
+                Sarod Instrumental
+            </a>
+                                </li>
+                            </ul>
+                        </details>
+                    </div>
+                    <div class="raga-box" onclick="toggleSection('raga_chandrakauns')">Chandrakauns
+                        <ul id="raga_chandrakauns" class="hidden">
+                            <li>Induces deep calmness</li>
+                            <li>Stabilizes emotions</li>
+                        </ul>
+                        <details class="listening-dropdown">
+                            <summary>Begin Listening</summary>
+                            <ul class="raga-links">
+                                <li>
+                                    <a href="https://www.youtube.com/watch?v=coz-ODQUgO4&list=PLBzUuuoaduiY5YFnoEzEoTiLqs6PVOEZt&index=19" target="_blank">
+                Classical Vocals
+            </a>
+                                </li>
+                            </ul>
+                        </details>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Insomnia / Sleep Aid -->
+            <div class="subsection">
+                <h3 onclick="toggleSection('insomnia')">Insomnia / Sleep Aid</h3>
+                <div id="insomnia" class="hidden">
+                    <div class="raga-box" onclick="toggleSection('raga_bageshri2')">Bageshri
+                        <ul id="raga_bageshri2" class="hidden">
+                            <li>Effective in insomnia</li>
+                        </ul>
+                        <details class="listening-dropdown">
+                            <summary>Begin Listening</summary>
+                            <ul class="raga-links">
+                                <li>
+                                    <a href="https://www.youtube.com/watch?v=7jkI02KaVEk&list=PLBzUuuoaduiY5YFnoEzEoTiLqs6PVOEZt&index=6" target="_blank">
+                Sarod Instrumental
+            </a>
+                                </li>
+                            </ul>
+                        </details>
+                    </div>
+                    <div class="raga-box" onclick="toggleSection('raga_darbari')">Darbari Kanada
+                        <ul id="raga_darbari" class="hidden">
+                            <li>Reduces anxiety and tension</li>
+                            <li>Helps sleep</li>
+                        </ul>
+                        <details class="listening-dropdown">
+                            <summary>Begin Listening</summary>
+                            <ul class="raga-links">
+                                <li>
+                                    <a href="https://www.youtube.com/watch?v=g4K7L9pPtCY&list=PLBzUuuoaduiY5YFnoEzEoTiLqs6PVOEZt&index=21" target="_blank">
+                Sarod Instrumental
+            </a>
+                                </li>
+                            </ul>
+                        </details>
+                    </div>
+                    <div class="raga-box" onclick="toggleSection('raga_chandrakauns2')">Chandrakauns
+                        <ul id="raga_chandrakauns2" class="hidden">
+                            <li>Helps with insomnia</li>
+                        </ul>
+                        <details class="listening-dropdown">
+                            <summary>Begin Listening</summary>
+                            <ul class="raga-links">
+                                <li>
+                                    <a href="https://www.youtube.com/watch?v=coz-ODQUgO4&list=PLBzUuuoaduiY5YFnoEzEoTiLqs6PVOEZt&index=19" target="_blank">
+                Classical Vocals
+            </a>
+                                </li>
+                            </ul>
+                        </details>
+                    </div>
+                    <div class="raga-box" onclick="toggleSection('raga_malkauns')">Malkauns
+                        <ul id="raga_malkauns" class="hidden">
+                            <li>Deep meditative effect</li>
+                            <li>Helps in insomnia</li>
+                        </ul>
+                        <details class="listening-dropdown">
+                            <summary>Begin Listening</summary>
+                            <ul class="raga-links">
+                                <li>
+                                    <a href="https://www.youtube.com/watch?v=4VwX8pC8MR8&list=PLBzUuuoaduiY5YFnoEzEoTiLqs6PVOEZt&index=46" target=" _blank ">
+                Listen to this raga
+            </a>
+                                </li>
+                            </ul>
+                        </details>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cooling / Body Relaxation -->
+            <div class="subsection ">
+                <h3 onclick="toggleSection( 'cooling') ">Cooling / Body Relaxation</h3>
+                <div id="cooling " class="hidden ">
+                    <div class="raga-box " onclick="toggleSection( 'raga_gaudsarang') ">Gaud Sarang
+                        <ul id="raga_gaudsarang " class="hidden ">
+                            <li>Cools body</li>
+                            <li>Reduces stress</li>
+                            <li>Refreshes mind</li>
+                        </ul>
+                        <details class="listening-dropdown ">
+                            <summary>Begin Listening</summary>
+                            <ul class="raga-links ">
+                                <li>
+                                    <a href="https://www.youtube.com/watch?v=tv0V_7egz5M&list=PLBzUuuoaduiY5YFnoEzEoTiLqs6PVOEZt&index=27 " target="_blank ">
+                Listen to this raga
+            </a>
+                                </li>
+                            </ul>
+                        </details>
+                    </div>
+                    <div class="raga-box " onclick="toggleSection( 'raga_megh') ">Megh
+                        <ul id="raga_megh " class="hidden ">
+                            <li>Cools the body</li>
+                            <li>Calms nervous system</li>
+                            <li>Reduces stress</li>
+                        </ul>
+                        <details class="listening-dropdown ">
+                            <summary>Begin Listening</summary>
+                            <ul class="raga-links ">
+                                <li>
+                                    <a href="https://www.youtube.com/watch?v=1hw5lOUzEvc&list=PLBzUuuoaduiY5YFnoEzEoTiLqs6PVOEZt&index=50 " target="_blank ">
+                Listen to this raga
+            </a>
+                                </li>
+                            </ul>
+                        </details>
+                    </div>
+                    <div class="raga-box " onclick="toggleSection( 'raga_miyamalhar') ">Miya ki Malhar
+                        <ul id="raga_miyamalhar " class="hidden ">
+                            <li>Refreshes body and mind</li>
+                            <li>Reduces heat and fatigue</li>
+                        </ul>
+                        <details class="listening-dropdown ">
+                            <summary>Begin Listening</summary>
+                            <ul class="raga-links ">
+                                <li>
+                                    <a href="https://www.youtube.com/watch?v=1hw5lOUzEvc&list=PLBzUuuoaduiY5YFnoEzEoTiLqs6PVOEZt&index=50 " target="_blank ">
+                Listen to this raga
+            </a>
+                                </li>
+                            </ul>
+                        </details>
+                    </div>
+                    <div class="raga-box " onclick="toggleSection( 'raga_brindabani2') ">Brindabani Sarang
+                        <ul id="raga_brindabani2 " class="hidden ">
+                            <li>Reduces body heat</li>
+                            <li>Refreshes mind</li>
+                        </ul>
+                        <details class="listening-dropdown ">
+                            <summary>Begin Listening</summary>
+                            <ul class="raga-links ">
+                                <li>
+                                    <a href="https://www.youtube.com/watch?v=9Uiy-oL1H9I&list=PLBzUuuoaduiY5YFnoEzEoTiLqs6PVOEZt&index=18 " target="_blank ">
+                Listen to this raga
+            </a>
+                                </li>
+                            </ul>
+                        </details>
+                    </div>
+                </div>
+            </div>
+
+            <!-- General Stress & Emotional Relief -->
+            <div class="subsection ">
+                <h3 onclick="toggleSection( 'general') ">General Stress & Emotional Relief</h3>
+                <div id="general " class="hidden ">
+                    <div class="raga-box " onclick="toggleSection( 'raga_lalit') ">Lalit
+                        <ul id="raga_lalit " class="hidden ">
+                            <li>Reduces anxiety</li>
+                            <li>Stabilizes emotions</li>
+                            <li>Calms early morning mind</li>
+                        </ul>
+                        <details class="listening-dropdown ">
+                            <summary>Begin Listening</summary>
+                            <ul class="raga-links ">
+                                <li>
+                                    <a href="https://www.youtube.com/watch?v=7WTgVhBznB8&list=PLBzUuuoaduiY5YFnoEzEoTiLqs6PVOEZt&index=44 " target="_blank ">
+                Listen to this raga
+            </a>
+                                </li>
+                            </ul>
+                        </details>
+                    </div>
+                    <div class="raga-box " onclick="toggleSection( 'raga_jaunpuri') ">Jaunpuri
+                        <ul id="raga_jaunpuri " class="hidden ">
+                            <li>Reduces anxiety</li>
+                            <li>Enhances emotional depth</li>
+                        </ul>
+                        <details class="listening-dropdown ">
+                            <summary>Begin Listening</summary>
+                            <ul class="raga-links ">
+                                <li>
+                                    <a href="https://www.youtube.com/watch?v=bUySDAOpMQs&list=PLBzUuuoaduiY5YFnoEzEoTiLqs6PVOEZt&index=35 " target="_blank ">
+                Listen to this raga
+            </a>
+                                </li>
+                            </ul>
+                        </details>
+                    </div>
+                    <div class="raga-box " onclick="toggleSection( 'raga_jog') ">Jog
+                        <ul id="raga_jog " class="hidden ">
+                            <li>Balances emotions</li>
+                            <li>Reduces mental confusion</li>
+                            <li>Encourages calm alertness</li>
+                        </ul>
+                        <details class="listening-dropdown ">
+                            <summary>Begin Listening</summary>
+                            <ul class="raga-links ">
+                                <li>
+                                    <a href="https://www.youtube.com/watch?v=Kuhq53EQlM8&list=PLBzUuuoaduiY5YFnoEzEoTiLqs6PVOEZt&index=37 " target="_blank ">
+                Listen to this raga
+            </a>
+                                </li>
+                            </ul>
+                        </details>
+                    </div>
+                    <div class="raga-box " onclick="toggleSection( 'raga_jogiya') ">Jogiya
+                        <ul id="raga_jogiya " class="hidden ">
+                            <li>Encourages detachment</li>
+                            <li>Calms restless thoughts</li>
+                            <li>Enhances spiritual awareness</li>
+                        </ul>
+                        <details class="listening-dropdown ">
+                            <summary>Begin Listening</summary>
+                            <ul class="raga-links ">
+                                <li>
+                                    <a href="https://www.youtube.com/watch?v=aVs4wL2T20U&list=PLBzUuuoaduiY5YFnoEzEoTiLqs6PVOEZt&index=38 " target="_blank ">
+                Listen to this raga
+            </a>
+                                </li>
+                            </ul>
+                        </details>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- EMOTIONAL HEALING -->
+    <div class="section ">
+        <h2 onclick="toggleSection( 'emotional') ">Emotional Healing</h2>
+        <div id="emotional " class="hidden ">
+
+            <!-- Sadness / Grief -->
+            <div class="subsection ">
+                <h3 onclick="toggleSection( 'sadness') ">Sadness / Grief / Emotional Weight</h3>
+                <div id="sadness " class="hidden ">
+                    <div class="raga-box " onclick="toggleSection( 'raga_asavari') ">Asavari
+                        <ul id="raga_asavari " class="hidden ">
+                            <li>Reduces stress and sadness</li>
+                            <li>Helps control mood swings</li>
+                        </ul>
+                        <details class="listening-dropdown ">
+                            <summary>Begin Listening</summary>
+                            <ul class="raga-links ">
+                                <li>
+                                    <a href="https://www.youtube.com/watch?v=vFRm1QMOMlg&list=PLBzUuuoaduiY5YFnoEzEoTiLqs6PVOEZt&index=5 " target="_blank ">
+                Listen to this raga
+            </a>
+                                </li>
+                            </ul>
+                        </details>
+                    </div>
+                    <div class="raga-box " onclick="toggleSection( 'raga_bageshri3') ">Bageshri
+                        <ul id="raga_bageshri3 " class="hidden ">
+                            <li>Relieves emotional heaviness</li>
+                            <li>Effective in insomnia</li>
+                        </ul>
+                        <details class="listening-dropdown ">
+                            <summary>Begin Listening</summary>
+                            <ul class="raga-links ">
+                                <li>
+                                    <a href="https://www.youtube.com/watch?v=7jkI02KaVEk&list=PLBzUuuoaduiY5YFnoEzEoTiLqs6PVOEZt&index=6 " target="_blank ">
+                Listen to this raga
+            </a>
+                                </li>
+                            </ul>
+                        </details>
+                    </div>
+                    <div class="raga-box " onclick="toggleSection( 'raga_bilaskhani') ">Bilaskhani Todi
+                        <ul id="raga_bilaskhani " class="hidden ">
+                            <li>Aids emotional healing</li>
+                            <li>Helps express suppressed emotions</li>
+                        </ul>
+                        <details class="listening-dropdown ">
+                            <summary>Begin Listening</summary>
+                            <ul class="raga-links ">
+                                <li>
+                                    <a href="https://www.youtube.com/results?search_query=raag+ahir+bhairav " target="_blank ">
+                Listen to this raga
+            </a>
+                                </li>
+                            </ul>
+                        </details>
+                    </div>
+                    <div class="raga-box " onclick="toggleSection( 'raga_jaunpuri2') ">Jaunpuri
+                        <ul id="raga_jaunpuri2 " class="hidden ">
+                            <li>Reduces anxiety</li>
+                            <li>Calms the mind</li>
+                            <li>Enhances emotional depth</li>
+                        </ul>
+                        <details class="listening-dropdown ">
+                            <summary>Begin Listening</summary>
+                            <ul class="raga-links ">
+                                <li>
+                                    <a href="https://www.youtube.com/results?search_query=raag+ahir+bhairav " target="_blank ">
+                Listen to this raga
+            </a>
+                                </li>
+                            </ul>
+                        </details>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stress & Tension Relief -->
+            <div class="subsection ">
+                <h3 onclick="toggleSection( 'stress') ">Stress & Tension Relief</h3>
+                <div id="stress " class="hidden ">
+                    <div class="raga-box " onclick="toggleSection( 'raga_brindabani3') ">Brindabani Sarang
+                        <ul id="raga_brindabani3 " class="hidden ">
+                            <li>Reduces body heat</li>
+                            <li>Relieves irritation</li>
+                        </ul>
+                        <details class="listening-dropdown ">
+                            <summary>Begin Listening</summary>
+                            <ul class="raga-links ">
+                                <li>
+                                    <a href="https://www.youtube.com/results?search_query=raag+ahir+bhairav " target="_blank ">
+                Listen to this raga
+            </a>
+                                </li>
+                            </ul>
+                        </details>
+                    </div>
+                    <div class="raga-box " onclick="toggleSection( 'raga_jhinjhoti') ">Jhinjhoti
+                        <ul id="raga_jhinjhoti " class="hidden ">
+                            <li>Reduces mental stress</li>
+                            <li>Enhances creativity</li>
+                        </ul>
+                        <details class="listening-dropdown ">
+                            <summary>Begin Listening</summary>
+                            <ul class="raga-links ">
+                                <li>
+                                    <a href="https://www.youtube.com/results?search_query=raag+ahir+bhairav " target="_blank ">
+                Listen to this raga
+            </a>
+                                </li>
+                            </ul>
+                        </details>
+                    </div>
+                    <div class="raga-box " onclick="toggleSection( 'raga_jog2') ">Jog
+                        <ul id="raga_jog2 " class="hidden ">
+                            <li>Balances emotions</li>
+                            <li>Reduces mental confusion</li>
+                            <li>Encourages calm alertness</li>
+                        </ul>
+                        <details class="listening-dropdown ">
+                            <summary>Begin Listening</summary>
+                            <ul class="raga-links ">
+                                <li>
+                                    <a href="https://www.youtube.com/results?search_query=raag+ahir+bhairav " target="_blank ">
+                Listen to this raga
+            </a>
+                                </li>
+                            </ul>
+                        </details>
+                    </div>
+                    <div class="raga-box " onclick="toggleSection( 'raga_jogiya2') ">Jogiya
+                        <ul id="raga_jogiya2 " class="hidden ">
+                            <li>Encourages detachment</li>
+                            <li>Calms restless thoughts</li>
+                            <li>Enhances spiritual awareness</li>
+                        </ul>
+                        <details class="listening-dropdown ">
+                            <summary>Begin Listening</summary>
+                            <ul class="raga-links ">
+                                <li>
+                                    <a href="https://www.youtube.com/results?search_query=raag+ahir+bhairav " target="_blank ">
+                Listen to this raga
+            </a>
+                                </li>
+                            </ul>
+                        </details>
+                    </div>
+                    <div class="raga-box " onclick="toggleSection( 'raga_miyan') ">Miyan ki Todi
+                        <ul id="raga_miyan " class="hidden ">
+                            <li>Reduces stress</li>
+                            <li>Encourages emotional stability</li>
+                            <li>Improves mental discipline</li>
+                        </ul>
+                        <details class="listening-dropdown ">
+                            <summary>Begin Listening</summary>
+                            <ul class="raga-links ">
+                                <li>
+                                    <a href="https://www.youtube.com/results?search_query=raag+ahir+bhairav " target="_blank ">
+                Listen to this raga
+            </a>
+                                </li>
+                            </ul>
+                        </details>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Introspection / Self-Reflection -->
+            <div class="subsection ">
+                <h3 onclick="toggleSection( 'introspection') ">Introspection / Self-Reflection</h3>
+                <div id="introspection " class="hidden ">
+                    <div class="raga-box " onclick="toggleSection( 'raga_jaijaivanti') ">Jaijaivanti
+                        <ul id="raga_jaijaivanti " class="hidden ">
+                            <li>Helps emotional healing</li>
+                            <li>Expresses longing and love</li>
+                            <li>Balances emotional extremes</li>
+                        </ul>
+                        <details class="listening-dropdown ">
+                            <summary>Begin Listening</summary>
+                            <ul class="raga-links ">
+                                <li>
+                                    <a href="https://www.youtube.com/results?search_query=raag+ahir+bhairav " target="_blank ">
+                Listen to this raga
+            </a>
+                                </li>
+                            </ul>
+                        </details>
+                    </div>
+                    <div class="raga-box " onclick="toggleSection( 'raga_kirvani') ">Kirvani
+                        <ul id="raga_kirvani " class="hidden ">
+                            <li>Enhances emotional intensity</li>
+                            <li>Encourages inner strength</li>
+                        </ul>
+                        <details class="listening-dropdown ">
+                            <summary>Begin Listening</summary>
+                            <ul class="raga-links ">
+                                <li>
+                                    <a href="https://www.youtube.com/results?search_query=raag+ahir+bhairav " target="_blank ">
+                Listen to this raga
+            </a>
+                                </li>
+                            </ul>
+                        </details>
+                    </div>
+                    <div class="raga-box " onclick="toggleSection( 'raga_madhuvanti') ">Madhuvanti
+                        <ul id="raga_madhuvanti " class="hidden ">
+                            <li>Encourages emotional sweetness</li>
+                            <li>Improves mood balance</li>
+                        </ul>
+                        <details class="listening-dropdown ">
+                            <summary>Begin Listening</summary>
+                            <ul class="raga-links ">
+                                <li>
+                                    <a href="https://www.youtube.com/results?search_query=raag+ahir+bhairav " target="_blank ">
+                Listen to this raga
+            </a>
+                                </li>
+                            </ul>
+                        </details>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- FOCUS & CONCENTRATION -->
+    <div class="section ">
+        <h2 onclick="toggleSection( 'focus') ">Focus & Concentration</h2>
+        <div id="focus " class="hidden ">
+            <div class="subsection ">
+                <h3 onclick="toggleSection( 'focus_sub') ">Ragas for Alertness & Mental Clarity</h3>
+                <div id="focus_sub " class="hidden ">
+                    <div class="raga-box " onclick="toggleSection( 'raga_abhogi') ">Abhogi
+                        <ul id="raga_abhogi " class="hidden ">
+                            <li>Improves concentration and memory</li>
+                            <li>Enhances mental discipline</li>
+                            <li>Reduces mental fatigue and restlessness</li>
+                        </ul>
+                        <details class="listening-dropdown ">
+                            <summary>Begin Listening</summary>
+                            <ul class="raga-links ">
+                                <li>
+                                    <a href="https://www.youtube.com/results?search_query=raag+ahir+bhairav " target="_blank ">
+                Listen to this raga
+            </a>
+                                </li>
+                            </ul>
+                        </details>
+                    </div>
+                    <div class="raga-box " onclick="toggleSection( 'raga_bhatiyar') ">Bhatiyar
+                        <ul id="raga_bhatiyar " class="hidden ">
+                            <li>Improves alertness and awareness</li>
+                            <li>Sharpens intellect</li>
+                            <li>Balances emotional restlessness</li>
+                        </ul>
+                        <details class="listening-dropdown ">
+                            <summary>Begin Listening</summary>
+                            <ul class="raga-links ">
+                                <li>
+                                    <a href="https://www.youtube.com/results?search_query=raag+ahir+bhairav " target="_blank ">
+                Listen to this raga
+            </a>
+                                </li>
+                            </ul>
+                        </details>
+                    </div>
+                    <div class="raga-box " onclick="toggleSection( 'raga_bhupali') ">Bhupali
+                        <ul id="raga_bhupali " class="hidden ">
+                            <li>Improves concentration and clarity</li>
+                            <li>Helps reduce hypertension</li>
+                            <li>Enhances devotional feelings</li>
+                        </ul>
+                    </div>
+                    <div class="raga-box " onclick="toggleSection( 'raga_bibhas') ">Bibhas
+                        <ul id="raga_bibhas " class="hidden ">
+                            <li>Improves focus and discipline</li>
+                            <li>Encourages seriousness of thought</li>
+                            <li>Enhances morning alertness</li>
+                        </ul>
+                        <details class="listening-dropdown ">
+                            <summary>Begin Listening</summary>
+                            <ul class="raga-links ">
+                                <li>
+                                    <a href="https://www.youtube.com/results?search_query=raag+ahir+bhairav " target="_blank ">
+                Listen to this raga
+            </a>
+                                </li>
+                            </ul>
+                        </details>
+                    </div>
+                    <div class="raga-box " onclick="toggleSection( 'raga_gunakali') ">Gunakali
+                        <ul id="raga_gunakali " class="hidden ">
+                            <li>Sharpens focus</li>
+                            <li>Improves mental discipline</li>
+                            <li>Reduces distractions</li>
+                        </ul>
+                        <details class="listening-dropdown ">
+                            <summary>Begin Listening</summary>
+                            <ul class="raga-links ">
+                                <li>
+                                    <a href="https://www.youtube.com/results?search_query=raag+ahir+bhairav " target="_blank ">
+                Listen to this raga
+            </a>
+                                </li>
+                            </ul>
+                        </details>
+                    </div>
+                    <div class="raga-box " onclick="toggleSection( 'raga_hamir') ">Hamir
+                        <ul id="raga_hamir " class="hidden ">
+                            <li>Boosts confidence and courage</li>
+                            <li>Strengthens determination</li>
+                            <li>Improves focus and leadership qualities</li>
+                        </ul>
+                        <details class="listening-dropdown ">
+                            <summary>Begin Listening</summary>
+                            <ul class="raga-links ">
+                                <li>
+                                    <a href="https://www.youtube.com/results?search_query=raag+ahir+bhairav " target="_blank ">
+                Listen to this raga
+            </a>
+                                </li>
+                            </ul>
+                        </details>
+                    </div>
+                    <div class="raga-box " onclick="toggleSection( 'raga_kirvani2') ">Kirvani
+                        <ul id="raga_kirvani2 " class="hidden ">
+                            <li>Enhances emotional intensity</li>
+                            <li>Improves focus</li>
+                            <li>Stimulates mental alertness</li>
+                        </ul>
+                        <details class="listening-dropdown ">
+                            <summary>Begin Listening</summary>
+                            <ul class="raga-links ">
+                                <li>
+                                    <a href="https://www.youtube.com/results?search_query=raag+ahir+bhairav " target="_blank ">
+                Listen to this raga
+            </a>
+                                </li>
+                            </ul>
+                        </details>
+                    </div>
+                    <div class="raga-box " onclick="toggleSection( 'raga_marva') ">Marva
+                        <ul id="raga_marva " class="hidden ">
+                            <li>Enhances alertness</li>
+                            <li>Sharpens awareness</li>
+                            <li>Improves mental focus</li>
+                        </ul>
+                        <details class="listening-dropdown ">
+                            <summary>Begin Listening</summary>
+                            <ul class="raga-links ">
+                                <li>
+                                    <a href="https://www.youtube.com/results?search_query=raag+ahir+bhairav " target="_blank ">
+                Listen to this raga
+            </a>
+                                </li>
+                            </ul>
+                        </details>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- POSITIVITY & JOY -->
+    <div class="section ">
+        <h2 onclick="toggleSection( 'positivity') ">Positivity & Joy</h2>
+        <div id="positivity " class="hidden ">
+            <div class="subsection ">
+                <h3 onclick="toggleSection( 'positivity_sub') ">Ragas for Happiness & Mood Elevation</h3>
+                <div id="positivity_sub " class="hidden ">
+                    <div class="raga-box " onclick="toggleSection( 'raga_alhaiyya') ">Alhaiyya Bilaval
+                        <ul id="raga_alhaiyya " class="hidden ">
+                            <li>Creates cheerful and positive mood</li>
+                            <li>Reduces mental tiredness</li>
+                            <li>Enhances emotional balance</li>
+                        </ul>
+                        <details class="listening-dropdown ">
+                            <summary>Begin Listening</summary>
+                            <ul class="raga-links ">
+                                <li>
+                                    <a href="https://www.youtube.com/results?search_query=raag+ahir+bhairav " target="_blank ">
+                Listen to this raga
+            </a>
+                                </li>
+                            </ul>
+                        </details>
+                    </div>
+                    <div class="raga-box " onclick="toggleSection( 'raga_bahar') ">Bahar
+                        <ul id="raga_bahar " class="hidden ">
+                            <li>Elevates mood and enthusiasm</li>
+                            <li>Fights depression</li>
+                            <li>Boosts mental energy</li>
+                        </ul>
+                        <details class="listening-dropdown ">
+                            <summary>Begin Listening</summary>
+                            <ul class="raga-links ">
+                                <li>
+                                    <a href="https://www.youtube.com/results?search_query=raag+ahir+bhairav " target="_blank ">
+                Listen to this raga
+            </a>
+                                </li>
+                            </ul>
+                        </details>
+                    </div>
+                    <div class="raga-box " onclick="toggleSection( 'raga_basant') ">Basant
+                        <ul id="raga_basant " class="hidden ">
+                            <li>Increases vitality and alertness</li>
+                            <li>Refreshes the mind</li>
+                        </ul>
+                        <details class="listening-dropdown ">
+                            <summary>Begin Listening</summary>
+                            <ul class="raga-links ">
+                                <li>
+                                    <a href="https://www.youtube.com/results?search_query=raag+ahir+bhairav " target="_blank ">
+                Listen to this raga
+            </a>
+                                </li>
+                            </ul>
+                        </details>
+                    </div>
+                    <div class="raga-box " onclick="toggleSection( 'raga_desh') ">Desh
+                        <ul id="raga_desh " class="hidden ">
+                            <li>Uplifts mood and emotions</li>
+                            <li>Encourages hope and positivity</li>
+                            <li>Reduces mental exhaustion</li>
+                        </ul>
+                        <details class="listening-dropdown ">
+                            <summary>Begin Listening</summary>
+                            <ul class="raga-links ">
+                                <li>
+                                    <a href="https://www.youtube.com/results?search_query=raag+ahir+bhairav " target="_blank ">
+                Listen to this raga
+            </a>
+                                </li>
+                            </ul>
+                        </details>
+                    </div>
+                    <div class="raga-box " onclick="toggleSection( 'raga_hansadhwani') ">Hansadhwani
+                        <ul id="raga_hansadhwani " class="hidden ">
+                            <li>Creates joy and optimism</li>
+                            <li>Improves mental alertness</li>
+                            <li>Enhances enthusiasm</li>
+                        </ul>
+                        <details class="listening-dropdown ">
+                            <summary>Begin Listening</summary>
+                            <ul class="raga-links ">
+                                <li>
+                                    <a href="https://www.youtube.com/results?search_query=raag+ahir+bhairav " target="_blank ">
+                Listen to this raga
+            </a>
+                                </li>
+                            </ul>
+                        </details>
+                    </div>
+                    <div class="raga-box " onclick="toggleSection( 'raga_hindol') ">Hindol
+                        <ul id="raga_hindol " class="hidden ">
+                            <li>Improves mood</li>
+                            <li>Encourages emotional balance</li>
+                            <li>Creates devotional joy</li>
+                        </ul>
+                        <details class="listening-dropdown ">
+                            <summary>Begin Listening</summary>
+                            <ul class="raga-links ">
+                                <li>
+                                    <a href="https://www.youtube.com/results?search_query=raag+ahir+bhairav " target="_blank ">
+                Listen to this raga
+            </a>
+                                </li>
+                            </ul>
+                        </details>
+                    </div>
+                    <div class="raga-box " onclick="toggleSection( 'raga_kamod') ">Kamod
+                        <ul id="raga_kamod " class="hidden ">
+                            <li>Creates happiness and warmth</li>
+                            <li>Improves emotional expression</li>
+                            <li>Enhances optimism</li>
+                        </ul>
+                        <details class="listening-dropdown ">
+                            <summary>Begin Listening</summary>
+                            <ul class="raga-links ">
+                                <li>
+                                    <a href="https://www.youtube.com/results?search_query=raag+ahir+bhairav " target="_blank ">
+                Listen to this raga
+            </a>
+                                </li>
+                            </ul>
+                        </details>
+                    </div>
+                    <div class="raga-box " onclick="toggleSection( 'raga_khamaj') ">Khamaj
+                        <ul id="raga_khamaj " class="hidden ">
+                            <li>Enhances romantic emotions</li>
+                            <li>Improves mood</li>
+                            <li>Encourages expressiveness</li>
+                        </ul>
+                        <details class="listening-dropdown ">
+                            <summary>Begin Listening</summary>
+                            <ul class="raga-links ">
+                                <li>
+                                    <a href="https://www.youtube.com/results?search_query=raag+ahir+bhairav " target="_blank ">
+                Listen to this raga
+            </a>
+                                </li>
+                            </ul>
+                        </details>
+                    </div>
+                    <div class="raga-box " onclick="toggleSection( 'raga_chayanat2') ">Chayanat
+                        <ul id="raga_chayanat2 " class="hidden ">
+                            <li>Boosts confidence</li>
+                            <li>Enhances romantic expression</li>
+                            <li>Balances emotions</li>
+                        </ul>
+                        <details class="listening-dropdown ">
+                            <summary>Begin Listening</summary>
+                            <ul class="raga-links ">
+                                <li>
+                                    <a href="https://www.youtube.com/results?search_query=raag+ahir+bhairav " target="_blank ">
+                Listen to this raga
+            </a>
+                                </li>
+                            </ul>
+                        </details>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ENERGY & VITALITY -->
+    <div class="section ">
+        <h2 onclick="toggleSection( 'energy') ">Energy & Vitality</h2>
+        <div id="energy " class="hidden ">
+            <div class="subsection ">
+                <h3 onclick="toggleSection( 'energy_sub') ">Ragas for Alertness & Vitality</h3>
+                <div id="energy_sub " class="hidden ">
+                    <div class="raga-box " onclick="toggleSection( 'raga_basant2') ">Basant
+                        <ul id="raga_basant2 " class="hidden ">
+                            <li>Increases vitality and alertness</li>
+                            <li>Improves immunity</li>
+                            <li>Reduces mental lethargy</li>
+                        </ul>
+                        <details class="listening-dropdown ">
+                            <summary>Begin Listening</summary>
+                            <ul class="raga-links ">
+                                <li>
+                                    <a href="https://www.youtube.com/results?search_query=raag+ahir+bhairav " target="_blank ">
+                Listen to this raga
+            </a>
+                                </li>
+                            </ul>
+                        </details>
+                    </div>
+                    <div class="raga-box " onclick="toggleSection( 'raga_marva2') ">Marva
+                        <ul id="raga_marva2 " class="hidden ">
+                            <li>Enhances alertness</li>
+                            <li>Sharpens awareness</li>
+                            <li>Encourages seriousness</li>
+                        </ul>
+                        <details class="listening-dropdown ">
+                            <summary>Begin Listening</summary>
+                            <ul class="raga-links ">
+                                <li>
+                                    <a href="https://www.youtube.com/results?search_query=raag+ahir+bhairav " target="_blank ">
+                Listen to this raga
+            </a>
+                                </li>
+                            </ul>
+                        </details>
+                    </div>
+                    <div class="raga-box " onclick="toggleSection( 'raga_hamir2') ">Hamir
+                        <ul id="raga_hamir2 " class="hidden ">
+                            <li>Boosts confidence and courage</li>
+                            <li>Strengthens determination</li>
+                            <li>Encourages leadership qualities</li>
+                        </ul>
+                        <details class="listening-dropdown ">
+                            <summary>Begin Listening</summary>
+                            <ul class="raga-links ">
+                                <li>
+                                    <a href="https://www.youtube.com/results?search_query=raag+ahir+bhairav " target="_blank ">
+                Listen to this raga
+            </a>
+                                </li>
+                            </ul>
+                        </details>
+                    </div>
+                    <div class="raga-box " onclick="toggleSection( 'raga_bhatiyar2') ">Bhatiyar
+                        <ul id="raga_bhatiyar2 " class="hidden ">
+                            <li>Improves alertness and awareness</li>
+                            <li>Sharpens intellect</li>
+                            <li>Helps overcome confusion</li>
+                        </ul>
+                        <details class="listening-dropdown ">
+                            <summary>Begin Listening</summary>
+                            <ul class="raga-links ">
+                                <li>
+                                    <a href="https://www.youtube.com/results?search_query=raag+ahir+bhairav " target="_blank ">
+                Listen to this raga
+            </a>
+                                </li>
+                            </ul>
+                        </details>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ROMANCE & LOVE -->
+    <div class="section ">
+        <h2 onclick="toggleSection( 'romance') ">Romance & Love</h2>
+        <div id="romance " class="hidden ">
+            <div class="subsection ">
+                <h3 onclick="toggleSection( 'romance_sub') ">Ragas for Romantic & Devotional Feelings</h3>
+                <div id="romance_sub " class="hidden ">
+                    <div class="raga-box " onclick="toggleSection( 'raga_bihar') ">Bihar
+                        <ul id="raga_bihar " class="hidden ">
+                            <li>Enhances romantic and joyful emotions</li>
+                            <li>Improves mood</li>
+                            <li>Reduces emotional dullness</li>
+                        </ul>
+                        <details class="listening-dropdown ">
+                            <summary>Begin Listening</summary>
+                            <ul class="raga-links ">
+                                <li>
+                                    <a href="https://www.youtube.com/results?search_query=raag+ahir+bhairav " target="_blank ">
+                Listen to this raga
+            </a>
+                                </li>
+                            </ul>
+                        </details>
+                    </div>
+                    <div class="raga-box " onclick="toggleSection( 'raga_chayanat3') ">Chayanat
+                        <ul id="raga_chayanat3 " class="hidden ">
+                            <li>Boosts confidence</li>
+                            <li>Enhances romantic expression</li>
+                            <li>Balances emotions</li>
+                        </ul>
+                        <details class="listening-dropdown ">
+                            <summary>Begin Listening</summary>
+                            <ul class="raga-links ">
+                                <li>
+                                    <a href="https://www.youtube.com/results?search_query=raag+ahir+bhairav " target="_blank ">
+                Listen to this raga
+            </a>
+                                </li>
+                            </ul>
+                        </details>
+                    </div>
+                    <div class="raga-box " onclick="toggleSection( 'raga_khamaj2') ">Khamaj
+                        <ul id="raga_khamaj2 " class="hidden ">
+                            <li>Enhances romantic emotions</li>
+                            <li>Encourages expressiveness</li>
+                            <li>Improves mood</li>
+                        </ul>
+                        <details class="listening-dropdown ">
+                            <summary>Begin Listening</summary>
+                            <ul class="raga-links ">
+                                <li>
+                                    <a href="https://www.youtube.com/results?search_query=raag+ahir+bhairav " target="_blank ">
+                Listen to this raga
+            </a>
+                                </li>
+                            </ul>
+                        </details>
+                    </div>
+                    <div class="raga-box " onclick="toggleSection( 'raga_jaijaivanti2') ">Jaijaivanti
+                        <ul id="raga_jaijaivanti2 " class="hidden ">
+                            <li>Helps emotional healing</li>
+                            <li>Expresses longing and love</li>
+                            <li>Balances emotional extremes</li>
+                        </ul>
+                        <details class="listening-dropdown ">
+                            <summary>Begin Listening</summary>
+                            <ul class="raga-links ">
+                                <li>
+                                    <a href="https://www.youtube.com/results?search_query=raag+ahir+bhairav " target="_blank ">
+                Listen to this raga
+            </a>
+                                </li>
+                            </ul>
+                        </details>
+                    </div>
+                    <div class="raga-box " onclick="toggleSection( 'raga_bhupali2') ">Bhupali
+                        <ul id="raga_bhupali2 " class="hidden ">
+                            <li>Enhances devotional feelings</li>
+                            <li>Improves mental calmness</li>
+                            <li>Improves concentration and clarity</li>
+                        </ul>
+                        <details class="listening-dropdown ">
+                            <summary>Begin Listening</summary>
+                            <ul class="raga-links ">
+                                <li>
+                                    <a href="https://www.youtube.com/results?search_query=raag+ahir+bhairav " target="_blank ">
+                Listen to this raga
+            </a>
+                                </li>
+                            </ul>
+                        </details>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SPIRITUAL / MEDITATION -->
+    <div class="section ">
+        <h2 onclick="toggleSection( 'spiritual') ">Spiritual / Meditation</h2>
+        <div id="spiritual " class="hidden ">
+            <div class="subsection ">
+                <h3 onclick="toggleSection( 'spiritual_sub') ">Ragas for Meditation & Inner Awareness</h3>
+                <div id="spiritual_sub " class="hidden ">
+                    <div class="raga-box " onclick="toggleSection( 'raga_bhairav') ">Bhairav
+                        <ul id="raga_bhairav " class="hidden ">
+                            <li>Builds discipline and mental strength</li>
+                            <li>Enhances spiritual focus</li>
+                            <li>Helps control anger</li>
+                        </ul>
+                    </div>
+                    <div class="raga-box " onclick="toggleSection( 'raga_bhairavi') ">Bhairavi
+                        <ul id="raga_bhairavi " class="hidden ">
+                            <li>Deep emotional release</li>
+                            <li>Reduces anxiety and stress</li>
+                            <li>Promotes emotional healing</li>
+                        </ul>
+                        <details class="listening-dropdown ">
+                            <summary>Begin Listening</summary>
+                            <ul class="raga-links ">
+                                <li>
+                                    <a href="https://www.youtube.com/results?search_query=raag+ahir+bhairav " target="_blank ">
+                Listen to this raga
+            </a>
+                                </li>
+                            </ul>
+                        </details>
+                    </div>
+                    <div class="raga-box " onclick="toggleSection( 'raga_jogiya3') ">Jogiya
+                        <ul id="raga_jogiya3 " class="hidden ">
+                            <li>Encourages detachment</li>
+                            <li>Calms restless thoughts</li>
+                            <li>Enhances spiritual awareness</li>
+                        </ul>
+                        <details class="listening-dropdown ">
+                            <summary>Begin Listening</summary>
+                            <ul class="raga-links ">
+                                <li>
+                                    <a href="https://www.youtube.com/results?search_query=raag+ahir+bhairav " target="_blank ">
+                Listen to this raga
+            </a>
+                                </li>
+                            </ul>
+                        </details>
+                    </div>
+                    <div class="raga-box " onclick="toggleSection( 'raga_malkauns2') ">Malkauns
+                        <ul id="raga_malkauns2 " class="hidden ">
+                            <li>Deep meditative effect</li>
+                            <li>Helps in insomnia</li>
+                            <li>Stabilizes emotions</li>
+                        </ul>
+                        <details class="listening-dropdown ">
+                            <summary>Begin Listening</summary>
+                            <ul class="raga-links ">
+                                <li>
+                                    <a href="https://www.youtube.com/results?search_query=raag+ahir+bhairav " target="_blank ">
+                Listen to this raga
+            </a>
+                                </li>
+                            </ul>
+                        </details>
+                    </div>
+                    <div class="raga-box " onclick="toggleSection( 'raga_lalit2') ">Lalit
+                        <ul id="raga_lalit2 " class="hidden ">
+                            <li>Calms the early morning mind</li>
+                            <li>Reduces anxiety</li>
+                            <li>Enhances introspection</li>
+                        </ul>
+                        <details class="listening-dropdown ">
+                            <summary>Begin Listening</summary>
+                            <ul class="raga-links ">
+                                <li>
+                                    <a href="https://www.youtube.com/results?search_query=raag+ahir+bhairav " target="_blank ">
+                Listen to this raga
+            </a>
+                                </li>
+                            </ul>
+                        </details>
+                    </div>
+                    <div class="raga-box " onclick="toggleSection( 'raga_kedar2') ">Kedar
+                        <ul id="raga_kedar2 " class="hidden ">
+                            <li>Calms anxiety</li>
+                            <li>Brings emotional peace</li>
+                            <li>Enhances spiritual focus</li>
+                        </ul>
+                        <details class="listening-dropdown ">
+                            <summary>Begin Listening</summary>
+                            <ul class="raga-links ">
+                                <li>
+                                    <a href="https://www.youtube.com/results?search_query=raag+ahir+bhairav " target="_blank ">
+                Listen to this raga
+            </a>
+                                </li>
+                            </ul>
+                        </details>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleSection(id) {
+            const el = document.getElementById(id);
+            if (el.classList.contains('hidden')) {
+                el.classList.remove('hidden');
+            } else {
+                el.classList.add('hidden');
+            }
+        }
+    </script>
+
+
+    <script>
+        function toggleSection(id) {
+            const el = document.getElementById(id);
+            if (el.classList.contains('hidden')) {
+                el.classList.remove('hidden');
+            } else {
+                el.classList.add('hidden');
+            }
+        }
+    </script>
+
+</body>
+
+</html>
